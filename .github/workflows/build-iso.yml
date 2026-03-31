@@ -25,8 +25,9 @@ jobs:
       - name: Prepare Custom Profile
         run: |
           cp -r /usr/share/archiso/configs/releng/ /tmp/custom-profile
-          cp -r ./custom-profile/* /tmp/custom-profile/
-
+          cat ./custom-profile/packages.x86_64 >> /tmp/custom-profile/packages.x86_64
+          rm ./custom-profile/packages.x86_64
+          cp -r ./custom-profile/* /tmp/custom-profile/ 2>/dev/null || true
       - name: Build the ISO
         run: |
           # Run mkarchiso against the newly combined profile
