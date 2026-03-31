@@ -1,2 +1,6 @@
 base
 linux
+mkinitcpio
+archlive
+systemd
+systemd-sysvcompat

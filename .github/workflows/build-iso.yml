@@ -22,9 +22,15 @@ jobs:
           pacman -Syu --noconfirm
           pacman -S --noconfirm archiso make
 
+      - name: Prepare Custom Profile
+        run: |
+          cp -r /usr/share/archiso/configs/releng/ /tmp/custom-profile
+          cp -r ./custom-profile/* /tmp/custom-profile/
+
       - name: Build the ISO
         run: |
-          mkarchiso -v -w /tmp/work -o /tmp/out ./custom-profile
+          # Run mkarchiso against the newly combined profile
+          mkarchiso -v -w /tmp/work -o /tmp/out /tmp/custom-profile
 
       - name: Upload ISO as Artifact
         uses: actions/upload-artifact@v4
